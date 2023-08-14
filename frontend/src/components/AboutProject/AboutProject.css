@@ -1,0 +1,176 @@
+.about-project {
+  display: flex;
+  flex-direction: column;
+  width: 89vw;
+  margin: 0 auto;
+}
+
+.about-project__heading {
+  text-align: start;
+  color: #fff;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  margin: 110px 0 0 0;
+  padding-bottom: 23px;
+  border-bottom: solid 1px #dadada;
+}
+
+.about-project__stages {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 50px 0 110px 0;
+  gap: 40px;
+}
+
+.about-project__columns {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  max-width: 550px;
+}
+
+.about-project__column-heading {
+  margin: 0;
+  text-align: start;
+  color: #fff;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+}
+
+.about-project__column-text {
+  margin: 0;
+  max-width: 550px;
+  text-align: start;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.about-project__weeks {
+  display: flex;
+  flex-direction: row;
+  background-color: #303030;
+  height: 36px;
+  align-items: center;
+  gap: 370px;
+  margin: 0;
+}
+
+.about-project__week {
+  width: 200px;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.about-project__week:nth-child(1) {
+  color: black;
+  padding: 9px 14px 9px 0;
+  background-color: #3ddc84;
+}
+
+.about-project__dev {
+  display: flex;
+  flex-direction: row;
+  gap: 384px;
+  margin: 14px 0 110px 0;
+}
+
+.about-project__dev-text {
+  margin: 0px;
+  width: 200px;
+  color: #8b8b8b;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+@media screen and (max-width: 769px) {
+  .about-project__heading {
+    margin-top: 90px;
+  }
+
+  .about-project__columns {
+    max-width: 319px;
+  }
+
+  .about-project__column-text {
+    font-size: 12px;
+  }
+
+  .about-project__stages {
+    margin: 70px 0 93px 0;
+  }
+  .about-project__weeks {
+    gap: 210px;
+  }
+  .about-project__week {
+    width: 120px;
+  }
+
+  .about-project__dev {
+    gap: 223px;
+    margin-bottom: 90px;
+  }
+
+  .about-project__dev-text {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about-project__heading {
+    margin-top: 70px;
+    padding-bottom: 28px;
+  }
+
+  .about-project__stages {
+    flex-direction: column;
+    margin: 60px 0;
+    gap: 56px;
+  }
+
+  .about-project__columns {
+    max-width: 284px;
+  }
+
+  .about-project__column-heading {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  .about-project__column-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__weeks {
+    height: 35px;
+    gap: 62px;
+  }
+  .about-project__week {
+    font-size: 11px;
+    width: 80px;
+  }
+  .about-project__dev {
+    gap: 78px;
+    margin-bottom: 140px;
+  }
+
+  .about-project__dev-text {
+    width: 80px;
+  }
+}

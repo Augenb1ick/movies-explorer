@@ -1,0 +1,20 @@
+[
+  {
+    "id": "film1",
+    "name": "Имя 123",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/2NjX19f/film1.png"
+  },
+  {
+    "id": "film2",
+    "name": "Ооооочень длиииииииинное имяяяя",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/0rDkdM0/film2.png"
+  },
+  {
+    "id": "film3",
+    "name": "Имя 123",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/PWwf4g6/film3.png"
+  }
+]

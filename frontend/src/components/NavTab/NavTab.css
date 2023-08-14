@@ -1,0 +1,99 @@
+.nav-tab {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+  justify-items: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s linear, visibility 0.3s;
+}
+
+.nav-tab_opened {
+  display: block;
+  visibility: visible;
+  flex-direction: column;
+  opacity: 1;
+  z-index: 5;
+}
+
+.nav-tab__container {
+  display: flex;
+  margin-left: auto;
+  flex-direction: column;
+  width: 68vw;
+  height: 100%;
+  background: #202020;
+  gap: 28px;
+  padding-top: 159px;
+}
+
+.nav-tab__close-btn {
+  border: none;
+  background: url(../../images/close-btn.svg) no-repeat center;
+  width: 25px;
+  height: 25px;
+  position: fixed;
+  top: 25px;
+  right: 25px;
+}
+
+.nav-tab__btn {
+  border: none;
+  background: none;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.nav-tab__btn_active {
+  border-bottom: 2px solid #fff;
+  padding-bottom: 4px;
+}
+
+.nav-tab__account {
+  display: inline-flex;
+  margin: 593px auto 0 auto;
+}
+
+.nav-tab__account-name {
+  cursor: pointer;
+  color: #fff;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+}
+
+.nav-tab__account-button {
+  border: transparent;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  margin: auto 0;
+  background: #313131 url(../../images/account-img.svg) no-repeat center;
+}
+
+@media screen and (max-width: 426px) {
+  .nav-tab__container {
+    width: inherit;
+    z-index: inherit;
+    gap: 24px;
+  }
+
+  .nav-tab__btn_active {
+    padding-bottom: 7px;
+  }
+
+  .nav-tab__account {
+    margin-top: 420px;
+  }
+}

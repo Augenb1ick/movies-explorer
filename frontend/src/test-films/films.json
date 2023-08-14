@@ -1,0 +1,50 @@
+[
+  {
+    "id": "film1",
+    "name": "Имя 123",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/2NjX19f/film1.png"
+  },
+  {
+    "id": "film2",
+    "name": "Ооооочень длиииииииинное имяяяя",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/0rDkdM0/film2.png"
+  },
+  {
+    "id": "film3",
+    "name": "Имя 123",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/PWwf4g6/film3.png"
+  },
+  {
+    "id": "film4",
+    "name": "Имя 123",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/3r3hYJV/film4.png"
+  },
+  {
+    "id": "film5",
+    "name": "Имя 123",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/pZMnc8D/film5.png"
+  },
+  {
+    "id": "film6",
+    "name": "Имя 123",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/qrqqCVw/film6.png"
+  },
+  {
+    "id": "film7",
+    "name": "Имя 123",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/845YhNs/film7.png"
+  },
+  {
+    "id": "film8",
+    "name": "Имя 123",
+    "duration": "1ч 42м",
+    "img": "https://i.ibb.co/XVPZFH1/film8.png"
+  }
+]
