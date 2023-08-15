@@ -1,6 +1,6 @@
 export const MOVIES_API_BASE_URL = 'https://api.nomoreparties.co/';
 export const MOVIES_API_URL = `${MOVIES_API_BASE_URL}beatfilm-movies`;
-export const MAIN_API_URL = 'api.movies-explorer-pro.nomoreparties.co';
+export const MAIN_API_URL = 'https://api.movies-explorer-pro.nomoreparties.co';
 export const SHORT_MOVIE_DURATION = 40;
 
 export const PROFILE_SUCCESS_MESSAGE = 'Профиль успешно обновлён!';
