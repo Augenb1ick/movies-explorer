@@ -8,6 +8,7 @@ const Profile = ({
   onSignOut,
   profileMessage,
   profileErr,
+  isLoading,
 }) => {
   const currentUser = useContext(CurrentUserContext);
 
@@ -44,8 +45,8 @@ const Profile = ({
     setIsEdit(true);
   };
 
-  const saveChanges = () => {
-    onSubmit(getValues());
+  const saveChanges = async () => {
+    await onSubmit(getValues());
     setIsEdit(false);
   };
 
@@ -60,7 +61,7 @@ const Profile = ({
         <label className='profile__label'>
           Имя
           <input
-            disabled={!isEdit}
+            disabled={!isEdit || isLoading}
             {...register('name', {
               required: 'Это поле нужно заполнить',
               minLength: {
@@ -76,7 +77,7 @@ const Profile = ({
         <label className='profile__label'>
           E-mail
           <input
-            disabled={!isEdit}
+            disabled={!isEdit || isLoading}
             {...register('email', {
               required: { value: true, message: 'Это поле нужно заполнить' },
               pattern: {
@@ -96,13 +97,14 @@ const Profile = ({
         {isEdit ? (
           <button
             type='submit'
-            disabled={!isValid || !isProfileChanged}
+            disabled={!isValid || !isProfileChanged || isLoading}
             onClick={saveChanges}
             className={`profile__save-btn ${
-              (!isValid || !isProfileChanged) && 'profile__save-btn_disabled'
+              (!isValid || !isProfileChanged || isLoading) &&
+              'profile__save-btn_disabled'
             }`}
           >
-            Сохранить
+            {isLoading ? 'Сохраняем...' : 'Сохранить'}
           </button>
         ) : (
           <>

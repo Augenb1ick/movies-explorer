@@ -1,4 +1,4 @@
-import { mainApiUrl } from './constants';
+import { MAIN_API_URL } from './constants';
 
 class MainApi {
   constructor({ baseUrl, noAuthHeaders, authHeaders }) {
@@ -79,7 +79,7 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  baseUrl: mainApiUrl,
+  baseUrl: MAIN_API_URL,
   authHeaders: () => ({
     authorization: 'Bearer ' + localStorage.getItem('jwt'),
     'Content-Type': 'application/json',

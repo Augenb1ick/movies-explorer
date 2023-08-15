@@ -50,7 +50,7 @@
   background-image: url(../../images/unlike-btn.svg);
 }
 
-.movies-card__like-btn_saved:hover {
+.movies-card:hover .movies-card__like-btn_saved {
   background-image: url(../../images/unlike-btn.svg);
 }
 
@@ -79,15 +79,25 @@
 
 @media screen and (max-width: 963px) {
   .movies-card__img {
-    width: 331.5px;
-    height: 190px;
+    width: 100%;
+    height: 200px;
   }
 }
 
-@media screen and (max-width: 963px) {
+@media screen and (max-width: 768px) {
+  .movies-card__img {
+    width: 331.5px;
+    height: 190px;
+  }
+  .movies-card__like-btn_saved {
+    background-image: url(../../images/unlike-btn.svg);
+  }
+}
+
+@media screen and (max-width: 766px) {
   .movies-card__img {
     width: 100%;
-    height: 100%;
+    height: 400px;
   }
 }
 

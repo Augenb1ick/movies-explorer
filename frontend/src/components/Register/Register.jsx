@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './Register.css';
 import logoImg from '../../images/logo.svg';
 
-const Register = ({ onRegister, registerErr }) => {
+const Register = ({ onRegister, registerErr, isLoading }) => {
   const {
     register,
     formState: { errors, isValid },
@@ -35,6 +35,7 @@ const Register = ({ onRegister, registerErr }) => {
       >
         <label className='auth__label'>Имя</label>
         <input
+          disabled={isLoading}
           {...register('name', {
             required: 'Это поле нужно заполнить',
             minLength: {
@@ -48,6 +49,7 @@ const Register = ({ onRegister, registerErr }) => {
         <span className='auth__input-error'>{errors?.name?.message}</span>
         <label className='auth__label'>E-mail</label>
         <input
+          disabled={isLoading}
           {...register('email', {
             required: { value: true, message: 'Это поле нужно заполнить' },
             pattern: {
@@ -62,6 +64,7 @@ const Register = ({ onRegister, registerErr }) => {
         <span className='auth__input-error'>{errors?.email?.message}</span>
         <label className='auth__label'>Пароль </label>
         <input
+          disabled={isLoading}
           {...register('password', {
             required: 'Это поле нужно заполнить',
             minLength: {
@@ -77,13 +80,13 @@ const Register = ({ onRegister, registerErr }) => {
         <span className='auth__input-error'>{errors?.password?.message}</span>
         <span className='auth__err-message'>{registerErr}</span>
         <button
-          disabled={!isValid}
+          disabled={!isValid || isLoading}
           className={`auth__submit-btn ${
-            !isValid ? 'auth__submit-btn_disabled' : ''
+            !isValid || isLoading ? 'auth__submit-btn_disabled' : ''
           }`}
           type='submit'
         >
-          Зарегистрироваться
+          {isLoading ? 'Регистрируем...' : 'Зарегистрироваться'}
         </button>
       </form>
       <div className='auth__redirect'>

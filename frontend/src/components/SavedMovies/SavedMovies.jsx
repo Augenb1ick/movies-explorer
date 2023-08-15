@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { shortMovieDuration } from '../../utills/constants';
+import { SHORT_MOVIE_DURATION } from '../../utills/constants';
 
 const SavedMovies = ({ savedMovies, onSubmit, onDelete, errMessage }) => {
   const [isShortFilm, setIsShortFilm] = useState(
@@ -16,7 +16,7 @@ const SavedMovies = ({ savedMovies, onSubmit, onDelete, errMessage }) => {
   };
 
   const filteredMovies = isShortFilm
-    ? savedMovies.filter((movie) => movie.duration < shortMovieDuration)
+    ? savedMovies.filter((movie) => movie.duration < SHORT_MOVIE_DURATION)
     : savedMovies;
 
   return (

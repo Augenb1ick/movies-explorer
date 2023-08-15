@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import '../Register/Register.css';
 import logoImg from '../../images/logo.svg';
 
-const Login = ({ onLogin, loginErr }) => {
+const Login = ({ onLogin, loginErr, isLoading }) => {
   const {
     register,
     formState: { errors, isValid },
@@ -35,6 +35,7 @@ const Login = ({ onLogin, loginErr }) => {
       >
         <label className='auth__label'>E-mail</label>
         <input
+          disabled={isLoading}
           {...register('email', {
             required: { value: true, message: 'Это поле нужно заполнить' },
             pattern: {
@@ -49,6 +50,7 @@ const Login = ({ onLogin, loginErr }) => {
         <span className='auth__input-error'>{errors?.email?.message}</span>
         <label className='auth__label'>Пароль </label>
         <input
+          disabled={isLoading}
           {...register('password', {
             required: 'Это поле нужно заполнить',
             minLength: {
@@ -64,13 +66,13 @@ const Login = ({ onLogin, loginErr }) => {
         <span className='auth__input-error'>{errors?.password?.message}</span>
         <span className='auth__err-message'>{loginErr}</span>
         <button
-          disabled={!isValid}
+          disabled={!isValid || isLoading}
           className={`auth__submit-btn ${
-            !isValid ? 'auth__submit-btn_disabled' : ''
+            !isValid || isLoading ? 'auth__submit-btn_disabled' : ''
           }`}
           type='submit'
         >
-          Войти
+          {isLoading ? 'Вход...' : 'Войти'}
         </button>
       </form>
       <div className='auth__redirect'>

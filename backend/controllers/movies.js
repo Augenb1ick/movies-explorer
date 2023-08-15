@@ -47,7 +47,11 @@ const postMovie = (req, res, next) => {
     .then((movie) => res.status(httpConstants.HTTP_STATUS_CREATED).send(movie))
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
-        return next(new BadRequestError('Переданы некорректные данные при создании фильма.'));
+        return next(
+          new BadRequestError(
+            'Переданы некорректные данные при создании фильма.'
+          )
+        );
       }
       return next(err);
     });
@@ -61,14 +65,15 @@ const deleteMovie = (req, res, next) => {
       if (!movie) {
         throw new NotFoundError('Фильм с указанным _id не найден.');
       }
-      if (!movie.owner.equals(req.user._id)) {
-        throw new ForbiddenError('Нельзя удалить этот фильм.');
-      }
-      return movie.deleteOne().then(() => res.send({ message: 'Фильм удалён.' }));
+      return movie
+        .deleteOne()
+        .then(() => res.send({ message: 'Фильм удалён.' }));
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.CastError) {
-        return next(new BadRequestError('Передан некорректный _id для удаления фильма.'));
+        return next(
+          new BadRequestError('Передан некорректный _id для удаления фильма.')
+        );
       }
       return next(err);
     });

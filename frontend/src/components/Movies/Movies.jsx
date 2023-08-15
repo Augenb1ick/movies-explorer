@@ -3,7 +3,7 @@ import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { shortMovieDuration } from '../../utills/constants';
+import { SHORT_MOVIE_DURATION } from '../../utills/constants';
 
 const Movies = ({
   isLoading,
@@ -26,7 +26,7 @@ const Movies = ({
   };
 
   const filteredMovies = isShortFilm
-    ? movies.filter((movie) => movie.duration < shortMovieDuration)
+    ? movies.filter((movie) => movie.duration < SHORT_MOVIE_DURATION)
     : movies;
 
   return (

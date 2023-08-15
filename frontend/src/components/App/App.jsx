@@ -1,17 +1,23 @@
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+  Navigate,
+} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { mainApi } from '../../utills/MainApi';
 import { moviesApi } from '../../utills/MoviesApi';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import {
-  conflictErr,
-  conflictErrMessage,
-  deniedError,
-  deniedErrorMessage,
-  moviesApiBaseUrl,
-  profileSuccessMessage,
-  searchServerErrorMessage,
-  serverErrorMessage,
+  MOVIES_API_BASE_URL,
+  CONFLICT_ERR,
+  CONFLICT_ERR_MESSAGE,
+  DENIED_ERROR,
+  DENIED_ERROR_MESSAGE,
+  PROFILE_SUCCESS_MESSAGE,
+  SEARCH_SERVER_ERROR_MESSAGE,
+  SERVER_ERROR_MESSAGE,
 } from '../../utills/constants';
 
 import './App.css';
@@ -71,8 +77,8 @@ const App = () => {
       return Object.assign(
         {
           movieId: id,
-          thumbnail: moviesApiBaseUrl + thumbnail.url,
-          image: moviesApiBaseUrl + thumbnail.url,
+          thumbnail: MOVIES_API_BASE_URL + thumbnail.url,
+          image: MOVIES_API_BASE_URL + thumbnail.url,
         },
         rest
       );
@@ -106,11 +112,12 @@ const App = () => {
         .getUsersMovies()
         .then((data) => {
           setSavedMovies(data);
+          setSavedSrchMovies(data);
           localStorage.setItem('savedMovies', JSON.stringify(data));
         })
         .catch(
           (err) =>
-            console.log(err) || setSearchErrMessage(searchServerErrorMessage)
+            console.log(err) || setSearchErrMessage(SEARCH_SERVER_ERROR_MESSAGE)
         );
       moviesApi
         .getMovies()
@@ -119,13 +126,14 @@ const App = () => {
         })
         .catch(
           (err) =>
-            console.log(err) || setSearchErrMessage(searchServerErrorMessage)
+            console.log(err) || setSearchErrMessage(SEARCH_SERVER_ERROR_MESSAGE)
         );
     }
   }, [isLoggedIn]);
 
   // login
   const handleLogin = ({ email, password }) => {
+    setIsLoading(true);
     mainApi
       .authorize(email, password)
       .then((res) => {
@@ -137,16 +145,18 @@ const App = () => {
         }
       })
       .catch((err) => {
-        if (err === deniedError) {
-          setLoginErr(deniedErrorMessage);
+        if (err === DENIED_ERROR) {
+          setLoginErr(DENIED_ERROR_MESSAGE);
         } else {
-          setLoginErr(serverErrorMessage);
+          setLoginErr(DENIED_ERROR_MESSAGE);
         }
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   // register
   const handleReg = ({ name, email, password }) => {
+    setIsLoading(true);
     mainApi
       .register(name, email, password)
       .then((res) => {
@@ -156,32 +166,35 @@ const App = () => {
         }
       })
       .catch((err) => {
-        if (err === conflictErr) {
-          setRegisterErr(conflictErrMessage);
+        if (err === CONFLICT_ERR) {
+          setRegisterErr(CONFLICT_ERR_MESSAGE);
         } else {
-          setRegisterErr(serverErrorMessage);
+          setRegisterErr(SERVER_ERROR_MESSAGE);
         }
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   // updateProfile
   const handleProfileUpdate = ({ name, email }) => {
+    setIsLoading(true);
     mainApi
       .updateUserInfo(name, email)
       .then((data) => {
         setCurrentUser(data);
-        setProfileMessage(profileSuccessMessage);
+        setProfileMessage(PROFILE_SUCCESS_MESSAGE);
         setTimeout(() => {
           setProfileMessage('');
         }, 2000);
       })
       .catch((err) => {
-        if (err === conflictErr) {
-          setProfileErr(conflictErrMessage);
+        if (err === CONFLICT_ERR) {
+          setProfileErr(CONFLICT_ERR_MESSAGE);
         } else {
-          setProfileErr(serverErrorMessage);
+          setProfileErr(CONFLICT_ERR_MESSAGE);
         }
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   // searchMovie
@@ -240,8 +253,10 @@ const App = () => {
         );
 
         setSavedMovies(filteredMov);
-        setSavedSrchMovies(filteredMov);
         localStorage.setItem('savedMovies', JSON.stringify(filteredMov));
+        setSavedSrchMovies(
+          savedSrchMovies.filter((movie) => movie.movieId !== movieId)
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -251,12 +266,17 @@ const App = () => {
   // logOut
   const handleSignOut = () => {
     localStorage.clear();
+    setAllMovies([]);
     setSrchResMovies([]);
     setSavedSrchMovies([]);
     setSearchMovQuery('');
+    setIsLoading(false);
+    setSavedMovies([]);
+    setCurrentUser({});
     setIsLoggedIn(false);
-    setLoginErr('');
     setSearchErrMessage('');
+    setRegisterErr('');
+    setLoginErr('');
     setProfileErr('');
     setProfileMessage('');
     navigate('/', { replace: true });
@@ -268,12 +288,30 @@ const App = () => {
         <Routes>
           <Route
             path='/signin'
-            element={<Login onLogin={handleLogin} loginErr={loginErr} />}
+            element={
+              !isLoggedIn ? (
+                <Login
+                  onLogin={handleLogin}
+                  loginErr={loginErr}
+                  isLoading={isLoading}
+                />
+              ) : (
+                <Navigate to='/' />
+              )
+            }
           />
           <Route
             path='/signup'
             element={
-              <Register onRegister={handleReg} registerErr={registerErr} />
+              !isLoggedIn ? (
+                <Register
+                  onRegister={handleReg}
+                  registerErr={registerErr}
+                  isLoading={isLoading}
+                />
+              ) : (
+                <Navigate to='/' />
+              )
             }
           />
           <Route
@@ -323,6 +361,7 @@ const App = () => {
                       savedMovies={savedSrchMovies}
                       onDelete={handleDeleteMovie}
                       errMessage={searchErrMessage}
+                      isLoading={isLoading}
                     />
                     <Footer />
                   </>
@@ -343,6 +382,7 @@ const App = () => {
                       onSignOut={handleSignOut}
                       profileMessage={profileMessage}
                       profileErr={profileErr}
+                      isLoading={isLoading}
                     />
                   </>
                 }
